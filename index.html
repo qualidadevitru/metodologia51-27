@@ -161,6 +161,10 @@ details[open] summary .chev{transform:rotate(180deg)}
 .desc-list{list-style:none;margin:0;padding:0 !important;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
 .desc-list li{border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px}
 .desc-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn);flex:none}
+.btn-outline{background:var(--surface);color:var(--brand);border:2px solid var(--brand);text-align:left}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg-btn{min-height:44px;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .95rem var(--body);cursor:pointer}
+.seg-btn.on{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
 .fontes{font-size:.85rem;color:var(--muted)}
 
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px}
@@ -339,6 +343,27 @@ details[open] summary .chev{transform:rotate(180deg)}
         <h1>Cursos descontinuados</h1>
         <p class="lead">17 cursos foram descontinuados. Antes de apresentar um curso ao candidato, confira se ele não está nesta lista.</p>
       </div>
+      <button class="btn btn-outline" type="button" id="btnFrases" aria-expanded="false" aria-controls="frases">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span id="btnFrasesTxt">Candidato pediu um desses cursos? Clique aqui para ver como responder</span>
+      </button>
+      <div class="panel" id="frases" hidden>
+        <h2>Como responder ao candidato</h2>
+        <div class="seg" role="tablist" aria-label="Situação">
+          <button type="button" role="tab" class="seg-btn on" aria-selected="true" data-sit="desc1">Pediu um curso que não temos</button>
+          <button type="button" role="tab" class="seg-btn" aria-selected="false" data-sit="desc2">Disse que viu no site</button>
+        </div>
+        <div class="chat" data-painel="desc1">
+          <p class="dica">Use quando o candidato pedir um curso desta lista.</p>
+          <div class="bubble" id="msg-desc1"></div>
+          <button class="btn" type="button" data-copy="desc1"><svg class="ico" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar mensagem</span></button>
+        </div>
+        <div class="chat" data-painel="desc2" hidden>
+          <p class="dica">Use depois de informar que o curso não está disponível, se o candidato disser que viu no site.</p>
+          <div class="bubble" id="msg-desc2"></div>
+          <button class="btn" type="button" data-copy="desc2"><svg class="ico" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar mensagem</span></button>
+        </div>
+      </div>
       <label for="buscaDesc" class="dica">Buscar um curso</label>
       <input id="buscaDesc" class="search" type="search" placeholder="Ex.: Física, Alimentos, Arquitetura">
       <div class="desc" id="descWrap">
@@ -460,6 +485,13 @@ const FAQ = [
   ["livros","Como funcionam os livros didáticos?",`<p>Até 2026 os livros eram gratuitos. A partir de agora, o aluno compra os livros que escolher pelo <b>Studeo</b> e recebe em casa:</p><ol><li>Acessa o Studeo</li><li>Seleciona o catálogo</li><li>Informa o endereço de entrega</li><li>Vê o valor e a taxa de entrega</li><li>Faz o pagamento</li><li>Recebe os livros em casa</li></ol><div class="alerta"><b>Importante:</b> o PDF dos livros continua gratuito para todos os alunos. A compra é só para quem quiser o livro impresso, e os valores ficam disponíveis para cada aluno consultar no Studeo.</div>`],
 ];
 
+const DESC_MSGS = {
+desc1:`Entendo seu interesse por esse curso! Embora ele não esteja disponível no momento, podemos buscar juntos uma opção que tenha tudo a ver com o que você deseja para sua formação.
+
+Me conta mais sobre o que você procura? Vou te ajudar a encontrar uma alternativa que combine com seus objetivos!`,
+desc2:`Entendo, e agradeço por me avisar! Esse curso realmente não está disponível mais, nosso site está passando por uma atualização, por isso esse curso ainda pode aparecer por lá. Peço desculpas pela confusão.
+
+Mas temos outras opções que podem combinar muito com o que você busca para sua formação. Se quiser, já te apresento algumas alternativas. Qual área mais te interessa?`};
 const MARCO_MSG = `*Por que o curso mudou?*
 Em 2025, o MEC criou novas regras para todos os cursos de graduação a distância do Brasil. O objetivo é aumentar a qualidade da formação e valorizar ainda mais o diploma EAD.
 
@@ -471,6 +503,14 @@ A Unicesumar já está com os cursos dentro das novas regras. Então você come�
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const zap = s => esc(s).replace(/\*([^*\n]+)\*/g,"<strong>$1</strong>");
 document.getElementById("msg-marco").innerHTML = zap(MARCO_MSG);
+for (const k in DESC_MSGS) document.getElementById("msg-"+k).innerHTML = zap(DESC_MSGS[k]);
+const btnFrases = document.getElementById("btnFrases"), frases = document.getElementById("frases");
+btnFrases.addEventListener("click", ()=>{ const open = frases.hidden; frases.hidden = !open; btnFrases.setAttribute("aria-expanded", String(open));
+  document.getElementById("btnFrasesTxt").textContent = open ? "Clique aqui para fechar as mensagens" : "Candidato pediu um desses cursos? Clique aqui para ver como responder"; });
+frases.querySelectorAll(".seg-btn").forEach(t=>t.addEventListener("click", ()=>{
+  frases.querySelectorAll(".seg-btn").forEach(x=>{ const on = x===t; x.classList.toggle("on",on); x.setAttribute("aria-selected",String(on)); });
+  frases.querySelectorAll("[data-painel]").forEach(pn=>pn.hidden = pn.dataset.painel !== t.dataset.sit);
+}));
 document.getElementById("areasPages").outerHTML = AREAS.map(a=>`
 <section class="page" id="p-met-${a.id}" hidden>
   <div class="head">
@@ -482,7 +522,10 @@ document.getElementById("areasPages").outerHTML = AREAS.map(a=>`
   ${a.semi ? `<div class="steps">
     <div class="step y1"><small>1º ano</small><b>Aulas ao vivo online</b><span>Pelo Teams, 1h30 cada</span></div>
     <div class="step y2"><small>2º ano em diante</small><b>Encontros de 3h cada</b><span>Alguns online, de <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada), e outros presenciais no polo, de <a class="termo" href="#faq-presencialidade">presencialidade</a></span></div>
-  </div>` : ``}
+  </div>` : `<div class="steps">
+    <div class="step y1"><small>Todos os anos do curso</small><b>Aulas ao vivo online</b><span>Pelo Teams, 1h30 cada, e estudo na plataforma no seu horário</span></div>
+    <div class="step y2"><small>No fim de cada disciplina</small><b>Prova presencial no polo</b><span>1 questão discursiva e 8 objetivas, valendo 6,0. Sem encontros de <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada)</span></div>
+  </div>`}
   <div class="panel chat">
     <h2>Mensagem para o WhatsApp</h2>
     <div class="bubble" id="msg-${a.id}">${zap(a.msg)}</div>
@@ -507,7 +550,7 @@ faqList.innerHTML = FAQ.map(([id,q,a])=>`
 document.addEventListener("click", e=>{
   const b = e.target.closest("[data-copy]"); if(!b) return;
   const id = b.dataset.copy;
-  const a = id==="marco" ? {id:"marco", msg:MARCO_MSG} : AREAS.find(x=>x.id===id);
+  const a = id==="marco" ? {id:"marco", msg:MARCO_MSG} : DESC_MSGS[id] ? {id, msg:DESC_MSGS[id]} : AREAS.find(x=>x.id===id);
   const ok = ()=>{ const s=b.querySelector("span"); s.textContent="Mensagem copiada"; b.classList.add("done");
     setTimeout(()=>{s.textContent="Copiar mensagem"; b.classList.remove("done")},2200); };
   const fallback = ()=>{ const el=document.getElementById("msg-"+a.id); const r=document.createRange(); r.selectNodeContents(el);
