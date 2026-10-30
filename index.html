@@ -21,7 +21,7 @@
   --bg:#F4F7FC; --surface:#FFFFFF; --fg:#13213F; --muted:#56637F; --line:#D9E2F0;
   --brand:#0A4DA2; --brand-strong:#073A7D; --brand-tint:#E8F0FB; --on-brand:#FFFFFF;
   --ok:#1C7C4D; --ok-tint:#E3F4EA; --warn:#9A5B00; --warn-tint:#FFF3DC;
-  --bubble:#E7F7DE; --bubble-fg:#14301A;
+  --bubble:#E7F7DE; --bubble-fg:#14301A; --alt:#0E6E78; --alt-tint:#E0F3F5;
   --display:"Montserrat", "Segoe UI", Arial, sans-serif;
   --body:"Nunito Sans", "Segoe UI", Arial, sans-serif;
   --radius:10px;
@@ -30,12 +30,12 @@
   --bg:#0C1424; --surface:#131E36; --fg:#E5ECF8; --muted:#A3B0C9; --line:#26344F;
   --brand:#6EA2F0; --brand-strong:#9CC0F6; --brand-tint:#18294A; --on-brand:#0C1424;
   --ok:#6FD3A0; --ok-tint:#123326; --warn:#F2C26B; --warn-tint:#3A2C10;
-  --bubble:#1D3A2A; --bubble-fg:#DDF3E3; color-scheme:dark}}
+  --bubble:#1D3A2A; --bubble-fg:#DDF3E3; --alt:#72D2DC; --alt-tint:#10313A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0C1424; --surface:#131E36; --fg:#E5ECF8; --muted:#A3B0C9; --line:#26344F;
   --brand:#6EA2F0; --brand-strong:#9CC0F6; --brand-tint:#18294A; --on-brand:#0C1424;
   --ok:#6FD3A0; --ok-tint:#123326; --warn:#F2C26B; --warn-tint:#3A2C10;
-  --bubble:#1D3A2A; --bubble-fg:#DDF3E3; color-scheme:dark}
+  --bubble:#1D3A2A; --bubble-fg:#DDF3E3; --alt:#72D2DC; --alt-tint:#10313A; color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -114,7 +114,7 @@ td.old{color:var(--muted)}
 :root[data-theme="dark"] .bar.act{color:var(--fg)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bar.act{color:var(--fg)}}
 .bar.prova{background:var(--brand);color:var(--on-brand)}
-.notas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.notas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 @media (max-width:600px){.notas{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .nota{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .nota b{font-family:var(--display);font-size:1.3rem;font-variant-numeric:tabular-nums;color:var(--brand)}
@@ -172,7 +172,98 @@ details[open] summary .chev{transform:rotate(180deg)}
 .seg{display:flex;flex-wrap:wrap;gap:8px}
 .seg-btn{min-height:44px;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .95rem var(--body);cursor:pointer}
 .seg-btn.on{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.chips{display:flex;flex-direction:column;gap:12px}
+.grupo{display:flex;flex-wrap:wrap;gap:8px}
+.grupo-lbl{width:100%;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{min-height:42px;padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 .95rem var(--body);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--brand)}
+.chip.on{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.placeholder{border:1px dashed var(--line);border-radius:var(--radius);padding:22px;color:var(--muted);text-align:center}
+.res-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.res-head h2{font-size:1.5rem}
+.resultado h3{font-size:1.05rem}
+.anos table{min-width:520px}
+.anos td{text-align:center;font-weight:700}
+.anos thead th{text-align:center}
+.anos td.sim{color:var(--ok)}
+.anos td.nao{color:var(--muted);font-weight:400}
+.busca-global{max-width:920px;margin:0 auto 28px;position:relative;display:flex;flex-direction:column;gap:6px}
+.busca-lbl{font-weight:700;font-size:.95rem}
+.busca-campo{display:flex;align-items:center;gap:10px;background:var(--surface);border:2px solid var(--brand);border-radius:12px;padding:0 14px}
+.busca-campo .ico{color:var(--brand)}
+.busca-campo input{flex:1;min-width:0;min-height:52px;border:0;background:none;color:var(--fg);font:1.05rem var(--body);outline:none}
+.busca-campo:focus-within{box-shadow:0 0 0 4px var(--brand-tint)}
+.sugs{position:absolute;top:100%;left:0;right:0;z-index:25;margin:6px 0 0;padding:6px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(10,30,70,.18);max-height:60vh;overflow-y:auto}
+.sug{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;min-height:52px;padding:10px 14px;border:0;border-radius:8px;background:none;color:var(--fg);font:1rem var(--body);text-align:left;cursor:pointer}
+.sug:hover,.sug.on{background:var(--brand-tint)}
+.sug small{color:var(--muted);font-size:.85rem}
+.sug-desc{color:var(--warn);font-weight:700}
+.sug-vazio{padding:10px 14px;color:var(--muted);font-size:.92rem}
+.nav-busca{background:rgba(255,255,255,.14)!important;margin-bottom:6px}
+.lista-area summary{font-size:.98rem}
+.grupos-lista{max-width:none!important;gap:14px!important}
+.grupo-box{border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.grupo-tit{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1rem;color:var(--brand-strong);padding-bottom:8px;border-bottom:1px solid var(--line)}
+:root[data-theme="dark"] .grupo-tit{color:var(--fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .grupo-tit{color:var(--fg)}}
+.lista-cursos{list-style:none;margin:0 0 6px;padding:0!important;display:grid!important;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:4px 16px!important}
+.lista-cursos li{display:flex;align-items:center;flex-wrap:nowrap;gap:8px;padding:6px 0}
+.lista-cursos a{font-weight:600;min-width:0}
+.lista-cursos .tag{flex:none;align-self:center}
+.grupo-lbl{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.slot-busca{display:block}
+.slot-busca .busca-global{margin:0}
+.tag-lanc{background:var(--warn-tint)!important;color:var(--warn)!important}
+.btn-busca{align-self:stretch;justify-content:center;min-height:60px;font-size:1.1rem;border-radius:12px}
+.modal{position:fixed;inset:0;z-index:60;background:rgba(5,15,35,.55);display:flex;align-items:flex-start;justify-content:center;
+  padding-top:calc(10vh + env(safe-area-inset-top,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.modal[hidden]{display:none}
+.modal-box{width:100%;max-width:620px;background:var(--surface);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px rgba(5,15,35,.35);max-height:80vh}
+.modal-top{display:flex;align-items:center;gap:12px}
+.modal-top h2{flex:1}
+.modal-x{display:inline-grid;place-items:center;width:44px;height:44px;border:0;border-radius:10px;background:var(--brand-tint);color:var(--brand);cursor:pointer}
+.sugs-modal{list-style:none;margin:0;padding:0;overflow-y:auto}
+body.sem-rolagem{overflow:hidden}
+.argumento{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:12px}
+.arg-head{display:flex;gap:12px;align-items:flex-start}
+.arg-ico{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--brand-tint);color:var(--brand);flex:none}
+.arg-head h3{margin:0 0 2px}
+.bubble-arg{background:var(--brand-tint);color:var(--fg)}
+.argumento .btn-outline{min-height:46px}
+.faq{gap:28px!important}
+.faq-tema{display:flex;flex-direction:column;gap:10px}
+.faq-tema>h2{font-size:1.15rem;color:var(--brand-strong);padding-bottom:6px;border-bottom:2px solid var(--brand-tint)}
+:root[data-theme="dark"] .faq-tema>h2{color:var(--fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .faq-tema>h2{color:var(--fg)}}
+.resp{font-weight:700;font-size:1.05rem}
+table.mini{min-width:0;font-size:.95rem}
+table.mini td,table.mini th{padding:10px 12px}
+.objecao{border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.objecao summary{font-size:1rem;min-height:52px;padding:14px 18px}
+.objecao .ans{padding:0 18px 18px}
+.msgs{display:flex;flex-direction:column;gap:12px}
+.msgs-tit,.rot-tit{font-size:1.05rem}
+.rot{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:18px}
+.tabs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:5px}
+.tab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:8px 12px;border:0;border-radius:9px;background:none;color:var(--muted);font:700 .95rem var(--body);cursor:pointer;text-align:center;line-height:1.25}
+.tab:hover{color:var(--brand)}
+.tab[aria-selected="true"]{background:var(--brand);color:var(--on-brand);box-shadow:0 2px 6px rgba(10,30,70,.18)}
+.tab .ico{flex:none;width:18px;height:18px}
+@media (max-width:600px){.tab{font-size:.84rem;padding:8px 6px;min-height:54px}.tab .ico{display:none}}
+.tab-painel{display:flex;flex-direction:column;gap:12px}
+.tab-painel[hidden]{display:none!important}
+.tab-dica{color:var(--muted);font-size:.92rem}
+.tab-painel .bubble{max-width:none}
+.parte-lbl{font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--brand);margin-top:6px}
+.lista-area{border:2px solid var(--alt);background:var(--surface)}
+.lista-area>summary{color:var(--alt);background:var(--alt-tint);border-radius:8px}
+.lista-area[open]>summary{border-radius:8px 8px 0 0;margin-bottom:14px}
+.lista-area>summary .chev{color:var(--alt)}
+.lista-area[open]{border-color:var(--alt)}
+.lista-area .lst-ico{color:var(--alt)}
 .fontes{font-size:.85rem;color:var(--muted)}
+.rodape{max-width:920px;margin:48px auto 0;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);line-height:1.5}
+.rodape b{color:var(--fg)}
 
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px}
 .side :focus-visible{outline-color:#fff}
@@ -208,9 +299,11 @@ details[open] summary .chev{transform:rotate(180deg)}
 
 <div class="app">
   <aside class="side" id="menu">
-    <div class="brand"><small>Contact Sales · Unicesumar</small><strong>Modelo Acadêmico 2027</strong></div>
+    <div class="brand"><small>Contact Center · Unicesumar</small><strong>Modelo Acadêmico 2027</strong></div>
     <nav aria-label="Navegação principal">
       <ul>
+        <li><button class="nav-link nav-busca" type="button" id="btnBuscar" data-abrir-busca>
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Buscar curso</button></li>
         <li><a class="nav-link" href="#inicio" data-page="inicio">
           <svg class="ico" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Início</a></li>
         <li>
@@ -222,10 +315,9 @@ details[open] summary .chev{transform:rotate(180deg)}
           <ul class="sub" id="subMet" hidden>
             <li><a href="#metodologia">Visão geral</a></li>
             <li><a href="#met-ead">EAD</a></li>
-            <li><a href="#met-lic">Licenciaturas</a></li>
+            <li><a href="#met-edu">Licenciaturas e Educação</a></li>
             <li><a href="#met-eng">Engenharias</a></li>
             <li><a href="#met-sau">Saúde</a></li>
-            <li><a href="#met-bem">Bem-Estar</a></li>
           </ul>
         </li>
         <li><a class="nav-link" href="#faq" data-page="faq">
@@ -234,7 +326,7 @@ details[open] summary .chev{transform:rotate(180deg)}
           <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M4.9 4.9l14.2 14.2"/></svg>Cursos descontinuados</a></li>
       </ul>
     </nav>
-    <p class="side-foot">Material de apoio da Qualidade para a operação de vendas.</p>
+    <p class="side-foot">Material elaborado pelo time de Qualidade do Contact Center Unicesumar. Uso interno.</p>
   </aside>
 
   <main>
@@ -248,16 +340,14 @@ details[open] summary .chev{transform:rotate(180deg)}
 
       <div class="panel">
         <h2>Por que o modelo mudou?</h2>
-        <p>Em maio de 2025, o Ministério da Educação (MEC) publicou o <a class="termo" href="#faq-marco">novo marco regulatório</a> da educação a distância. É um conjunto de regras que vale para <b>todas as faculdades do Brasil</b> que oferecem graduação EAD, e não só para a Unicesumar.</p>
-        <p>O objetivo do MEC é elevar a qualidade da formação e valorizar ainda mais o diploma de quem estuda a distância. Para isso, os cursos passam a ter mais contato com professores, mais prática e avaliações mais consistentes:</p>
-        <ul>
-          <li>Nenhum curso de graduação pode mais ser 100% a distância. Todos passam a ter uma parte de <a class="termo" href="#faq-presencialidade">presencialidade</a> e de <a class="termo" href="#faq-asm">Atividade Síncrona Mediada (ASM)</a>.</li>
-          <li>Toda disciplina tem <a class="termo" href="#faq-prova">prova presencial</a>, com o maior peso na nota.</li>
-          <li>Os cursos passam a ser organizados em três formatos: presencial, <a class="termo" href="#faq-semipresencial">semipresencial</a> e EAD.</li>
-        </ul>
-        <p><b>A Unicesumar já está dentro das novas regras.</b> Os cursos foram reorganizados para cumprir as exigências do MEC sem perder a flexibilidade que o aluno precisa, com aulas ao vivo, plataforma de estudos moderna e a estrutura dos polos para as atividades presenciais.</p>
-        <p>O novo modelo começa em 2027.</p>
+        <p>Em maio de 2025, o MEC publicou o <a class="termo" href="#faq-marco">novo marco regulatório</a> da educação a distância, que vale para <b>todas as faculdades do Brasil</b>. Com ele, nenhuma graduação pode ser 100% a distância: toda disciplina passa a ter <a class="termo" href="#faq-prova">prova presencial</a>, e os cursos semipresenciais ganham <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada) e <a class="termo" href="#faq-presencialidade">presencialidade</a> no polo.</p>
+        <p><b>A Unicesumar já está dentro das novas regras.</b> O novo modelo começa em 2027.</p>
       </div>
+
+      <button type="button" class="btn btn-busca" data-abrir-busca>
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span>Buscar metodologia de curso</span>
+      </button>
 
       <div class="panel chat">
         <h2>Para enviar ao candidato que perguntar sobre as mudanças</h2>
@@ -270,8 +360,8 @@ details[open] summary .chev{transform:rotate(180deg)}
 
       <div class="facts">
         <div class="fact"><b>7,0</b><span>nova média para aprovação</span></div>
-        <div class="fact"><b>10 semanas</b><span>duração de cada disciplina</span></div>
-        <div class="fact"><b>2 disciplinas</b><span>cursadas ao mesmo tempo</span></div>
+        <div class="fact"><b>2 disciplinas</b><span>a cada 10 semanas, cursadas ao mesmo tempo</span></div>
+        <div class="fact"><b>Semanas 9 e 10</b><span>provas presenciais no polo</span></div>
       </div>
 
       <div class="head">
@@ -301,7 +391,17 @@ details[open] summary .chev{transform:rotate(180deg)}
       <div class="head">
         <span class="eyebrow">Metodologia</span>
         <h1>Como funciona cada disciplina</h1>
-        <p class="lead">Vale para todos os cursos EAD e semipresenciais. O aluno faz 2 disciplinas ao mesmo tempo, cada uma com 10 semanas, e as provas ficam no fim.</p>
+        <p class="lead">Vale para todos os cursos EAD e semipresenciais. A cada 10 semanas, o aluno cursa 2 disciplinas ao mesmo tempo, e as provas ficam no fim.</p>
+      </div>
+      <div class="slot-busca">
+        <div class="busca-global" id="barraBusca">
+          <label for="buscaCurso" class="busca-lbl">Digite aqui o curso de interesse para visualizar a metodologia</label>
+          <div class="busca-campo">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="buscaCurso" type="search" placeholder="Ex.: pedagogia, engenharia civil, biomedicina" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugs" aria-autocomplete="list">
+          </div>
+          <ul class="sugs" id="sugs" role="listbox" hidden></ul>
+        </div>
       </div>
 
       <div class="panel">
@@ -310,8 +410,8 @@ details[open] summary .chev{transform:rotate(180deg)}
           <div class="weeks" role="img" aria-label="Disciplina 1 e Disciplina 2 acontecem ao mesmo tempo: atividades da semana 1 à 8 e provas nas semanas 9 e 10">
             <span></span>
             <span class="wk">S1</span><span class="wk">S2</span><span class="wk">S3</span><span class="wk">S4</span><span class="wk">S5</span><span class="wk">S6</span><span class="wk">S7</span><span class="wk">S8</span><span class="wk">S9</span><span class="wk">S10</span>
-            <span class="lbl">Disciplina 1</span><span class="bar act" style="grid-column:span 8">Aulas ao vivo e atividades</span><span class="bar prova" style="grid-column:span 2">Prova</span>
-            <span class="lbl">Disciplina 2</span><span class="bar act" style="grid-column:span 8">Aulas ao vivo e atividades</span><span class="bar prova" style="grid-column:span 2">Prova</span>
+            <span class="lbl">Disciplina 1</span><span class="bar act" style="grid-column:span 8">Aulas, encontros e atividades</span><span class="bar prova" style="grid-column:span 2">Prova</span>
+            <span class="lbl">Disciplina 2</span><span class="bar act" style="grid-column:span 8">Aulas, encontros e atividades</span><span class="bar prova" style="grid-column:span 2">Prova</span>
           </div>
         </div>
         <p class="dica">A distribuição das atividades pode variar conforme o curso e a matriz curricular.</p>
@@ -321,22 +421,21 @@ details[open] summary .chev{transform:rotate(180deg)}
         <h2>Como a nota é formada</h2>
         <p>A nota vai até 10. São 4 pontos em <a class="termo" href="#faq-atividades">atividades</a> ao longo das semanas e 6 pontos na <a class="termo" href="#faq-prova">prova presencial</a>. Para ser aprovado, a média é 7,0.</p>
         <div class="notas">
-          <div class="nota"><b>0,5</b><span>A.E. 01 (objetiva)</span></div>
-          <div class="nota"><b>0,5</b><span>A.E. 02 (objetiva)</span></div>
-          <div class="nota"><b>1,5</b><span>HUB de Atualidades (objetiva)</span></div>
-          <div class="nota"><b>1,5</b><span>M.A.P.A. (prática e discursiva)</span></div>
-          <div class="nota"><b>6,0</b><span>Prova presencial (1 discursiva valendo 2,0 + 8 objetivas valendo 4,0)</span></div>
+          <div class="nota"><b>1,0</b><span>A.E. 01 (objetiva)</span></div>
+          <div class="nota"><b>1,0</b><span>A.E. 02 (objetiva)</span></div>
+          <div class="nota"><b>2,0</b><span>M.A.P.A. (prática e discursiva)</span></div>
+          <div class="nota"><b>6,0</b><span>Prova presencial (discursiva 2,0 + objetivas 4,0)</span></div>
           <div class="nota total"><b>10,0</b><span>Total da disciplina</span></div>
         </div>
+        <p class="dica">Disciplinas de natureza prática, estágios e TCC podem ter uma composição de nota diferente.</p>
       </div>
 
-      <div class="head"><h2>Escolha a área</h2><p class="dica">Cada área tem a mensagem pronta para o WhatsApp.</p></div>
+      <div class="head"><h2>Escolha a área</h2><p class="dica">Em cada área, procure o curso do candidato para ver a metodologia dele e a mensagem pronta.</p></div>
       <div class="areas">
-        <a class="area-card" href="#met-ead"><span class="tag">EAD</span><b>EAD</b><span>Negócios, Gestão, Tecnologia e Comunicação</span></a>
-        <a class="area-card" href="#met-lic"><span class="tag">Semipresencial</span><b>Licenciaturas</b><span>Licenciaturas e Educação</span></a>
-        <a class="area-card" href="#met-eng"><span class="tag">Semipresencial</span><b>Engenharias</b><span>Engenharia, Produção e Construção</span></a>
-        <a class="area-card" href="#met-sau"><span class="tag">Semipresencial</span><b>Saúde</b><span>Cursos da área da saúde</span></a>
-        <a class="area-card" href="#met-bem"><span class="tag">Semipresencial</span><b>Bem-Estar</b><span>Cursos de bem-estar</span></a>
+        <a class="area-card" href="#met-ead"><span class="tag">EAD</span><b>EAD</b><span>Gestão, Tecnologia, Comunicação, Design e mais</span></a>
+        <a class="area-card" href="#met-edu"><span class="tag">Semipresencial</span><b>Licenciaturas e Educação</b><span>Licenciaturas, Psicopedagogia e TEA</span></a>
+        <a class="area-card" href="#met-eng"><span class="tag">Semipresencial</span><b>Engenharias</b><span>Engenharias, Agronomia e tecnólogos</span></a>
+        <a class="area-card" href="#met-sau"><span class="tag">Semipresencial</span><b>Saúde</b><span>Saúde, Bem-estar e tecnólogos</span></a>
       </div>
     </section>
 
@@ -398,98 +497,199 @@ details[open] summary .chev{transform:rotate(180deg)}
         <p class="lead">Respostas curtas para tirar dúvidas na hora do atendimento.</p>
       </div>
       <label for="busca" class="dica">Buscar uma dúvida</label>
-      <input id="busca" class="search" type="search" placeholder="Ex.: ASM, média, livros, falta">
+      <input id="busca" class="search" type="search" placeholder="Ex.: gravada, prova, livro, falta, computador">
       <div class="faq" id="faqList"></div>
       <p class="empty" id="faqVazio" hidden>Nenhuma dúvida encontrada com esse termo.</p>
       <p class="fontes">Fontes: apresentação Modelo Acadêmico Operacional 2027 e <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/Decreto/D12456.htm" target="_blank" rel="noopener">Decreto nº 12.456/2025</a>.</p>
     </section>
+    <footer class="rodape"><p><b>ATENÇÃO:</b> Material de apoio elaborado pelo time de Qualidade para consulta interna do Contact Center Unicesumar. Uso exclusivo da equipe: não compartilhe este conteúdo nem o link com candidatos ou terceiros.</p></footer>
   </main>
+</div>
+
+<div class="modal" id="modalBusca" hidden role="dialog" aria-modal="true" aria-labelledby="modalTit">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h2 id="modalTit">Buscar metodologia de curso</h2>
+      <button type="button" class="modal-x" aria-label="Fechar"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <label for="buscaModal" class="busca-lbl">Digite o curso de interesse</label>
+    <div class="busca-campo">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="buscaModal" type="search" placeholder="Ex.: pedagogia, engenharia civil, biomedicina" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sugsModal" aria-autocomplete="list">
+    </div>
+    <ul class="sugs-modal" id="sugsModal" role="listbox"></ul>
+  </div>
 </div>
 
 <script>
 /* ---------- conteúdo das áreas ---------- */
+/* ---------- metodologia por curso ---------- */
+const APROV = `
+
+*Como você é aprovado:*
+• Sua nota é composta por atividades (4 pontos) e prova presencial (6 pontos)
+• Alcançando média 7,0, você garante sua aprovação
+• Caso precise, poderá contar com a prova substitutiva`;
+const APROV_SEMI = `
+
+*Como você é aprovado:*
+• Sua nota é composta por atividades (4 pontos) e prova presencial (6 pontos)
+• Alcançando média 7,0 e participando dos encontros online e no polo, você garante sua aprovação
+• Caso precise, poderá contar com a prova substitutiva`;
+const INICIO = `*Como funciona o seu curso:*
+• A cada 10 semanas, você cursa 2 disciplinas ao mesmo tempo`;
+const VIVO1 = `• *1º ano:* aulas ao vivo toda semana pelo Teams, que ficam gravadas para você assistir quando quiser`;
+const PROVAS = `• Provas no polo, nas semanas 9 e 10, em datas que você agenda`;
+const AGENDA = `• Você agenda os encontros na plataforma de estudos (Studeo)`;
+
+const PERFIS = {
+  ead:{anos:["Todos os anos"], vivo:["A cada 2 semanas, por disciplina"], asm:["Não tem"], polo:["Só para as provas"],
+    nota:"Aulas ao vivo de 1h30 pelo Teams, que ficam gravadas. No EAD, não há reprovação por falta.",
+    msg: INICIO+`
+• Cada disciplina tem aula ao vivo pelo Teams a cada 2 semanas, e as aulas ficam gravadas para você assistir quando quiser
+• O restante você estuda pela plataforma de estudos (Studeo), no seu horário
+`+PROVAS+APROV},
+  eadsv:{anos:["Todos os anos"], vivo:["Não tem"], asm:["Não tem"], polo:["Só para as provas"],
+    nota:"No EAD, não há reprovação por falta.",
+    msg: INICIO+`
+• Você estuda pela plataforma de estudos (Studeo), no seu horário
+`+PROVAS+APROV},
+  lic:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","2 por semana","2 por semana","2 por semana"],
+    nota:"No polo, os encontros são teóricos, em sala Mova Play, que pode reunir alunos de cursos diferentes.",
+    msg: INICIO+`
+`+VIVO1+`
+• *Do 2º ano em diante:* por semana, 2 encontros online ao vivo com a turma e 2 encontros no polo, de 3h cada
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  lic5:{anos:["1º ano","2º ano","3º ano","4º ano","5º ano"], vivo:["Toda semana","Não","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana","2 por semana"], polo:["Não","2 por semana","2 por semana","2 por semana","2 por semana"],
+    nota:"No polo, os encontros são teóricos, em sala Mova Play, que pode reunir alunos de cursos diferentes.",
+    msg: null},
+  psico:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","1 por semana","1 por semana","1 por semana"],
+    nota:"No polo, os encontros são teóricos, em sala Mova Play.",
+    msg: INICIO+`
+`+VIVO1+`
+• *Do 2º ano em diante:* por semana, 2 encontros online ao vivo com a turma e 1 encontro no polo, de 3h cada
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  tea:{anos:["1º ano","2º ano","3º ano"], vivo:["Toda semana","Não","Não"], asm:["Não","Sim","Sim"], polo:["Não","Sim","Sim"],
+    nota:"No polo, os encontros são teóricos, em sala Mova Play. A quantidade de encontros por semana do 2º e 3º ano ainda não foi detalhada.",
+    msg: INICIO+`
+`+VIVO1+`
+• *Do 2º ano em diante:* encontros online ao vivo com a turma e encontros no polo, de 3h cada
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  eng:{anos:["1º ano","2º ano","3º ano","4º ano","5º ano"], vivo:["Toda semana","Não","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana","2 por semana"], polo:["Não","1 por semana","1 por semana","1 por semana","1 por semana"],
+    nota:"No 2º ano, os encontros online vão da semana 1 à 6. No polo, aulas teóricas e práticas, em sala e laboratório. No 5º ano, os módulos com TCC têm 1 encontro a mais no polo.",
+    msg: INICIO+`
+`+VIVO1+`
+• *Do 2º ano em diante:* por semana, 2 encontros online ao vivo com a turma e 1 encontro no polo, de 3h cada, com aulas em sala e laboratório
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  tecind:{anos:["1º ano","2º ano","3º ano"], vivo:["Não","Não","Não"], asm:["1 por semana","2 por semana","2 por semana"], polo:["1 por semana","2 por semana","2 por semana"],
+    nota:"No polo, aulas teóricas e práticas, em sala e no laboratório do curso.",
+    msg: INICIO+`
+• Seu curso é prático desde o início: não tem aulas ao vivo e os encontros no polo começam no 1º ano
+• *1º ano:* por semana, 1 encontro online ao vivo com a turma e 1 encontro no polo, de 3h cada
+• *Do 2º ano em diante:* por semana, 2 encontros online e 2 no polo, de 3h cada
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  edf:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","Em 4 semanas do módulo","Em 6 semanas do módulo","Não"],
+    nota:"No polo, atividades teórico-práticas em sala. Algumas disciplinas podem usar quadra poliesportiva por convênio.",
+    msg: INICIO+`
+`+VIVO1+`
+• *Do 2º ano em diante:* 2 encontros online ao vivo com a turma por semana, de 3h cada
+• *2º e 3º ano:* também tem encontros no polo em algumas semanas do módulo, com atividades teóricas e práticas
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  bio:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","Não","1 por semana","Não"],
+    nota:"No polo, aulas práticas em laboratório.",
+    msg: INICIO+`
+`+VIVO1+`
+• *Do 2º ano em diante:* 2 encontros online ao vivo com a turma por semana, de 3h cada
+• *3º ano:* além dos encontros online, 1 encontro por semana no laboratório do polo, de 3h
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  farm:{anos:["1º ano","2º ano","3º ano","4º ano","5º ano"], vivo:["Toda semana","Não","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana","1 por semana"], polo:["Não","Não","1 por semana","1 por semana","Não (estágios)"],
+    provas:"Provas no polo nas semanas 9 e 10. No 5º ano, 1 prova, na semana 10.",
+    nota:"No polo, aulas práticas em laboratório. A carga horária dos estágios ainda não foi divulgada.",
+    msg: INICIO+`
+`+VIVO1+`
+• *2º ao 4º ano:* 2 encontros online ao vivo com a turma por semana, de 3h cada
+• *3º e 4º ano:* também 1 encontro por semana no laboratório do polo, de 3h
+• *5º ano:* estágio supervisionado e 1 encontro online por semana
+`+AGENDA+`
+`+PROVAS+APROV_SEMI},
+  lanc:{lanc:true, msg:""},
+  pend:{pendente:true,
+    msg: INICIO+`
+• O curso é semipresencial: tem encontros online ao vivo com a turma e encontros no polo, de 3h cada
+`+AGENDA+`
+`+PROVAS+APROV_SEMI}
+};
+PERFIS.lic5.msg = PERFIS.lic.msg;
+
+const B="Bacharelado", T="Tecnólogo", L="Licenciatura";
 const AREAS = [
-  {id:"ead", nome:"EAD", tag:"EAD", sub:"Negócios, Gestão, Tecnologia e Comunicação", semi:false,
-   msg:`*Como funciona o seu curso:*
-• Você faz 2 disciplinas ao mesmo tempo, cada uma com 10 semanas
-• Estuda pela plataforma no seu horário, com aulas ao vivo pelo Teams
-• No fim das disciplinas, faz a prova no polo
-• Ao longo do curso, participa de projetos de extensão
-
-*Como você é aprovado:*
-• A nota vai até 10: 4 pontos vêm das atividades ao longo das semanas e 6 da prova
-• A média para aprovação é 7,0`,
-   onde:[["Prova","Laboratório de informática ou sala de aula do polo"],["Estágio","Campo externo, nos cursos que preveem"],["Extensão","15% do curso, em ambientes externos ou internos"]],
-   alerta:"No EAD não há reprovação por falta. A aprovação depende só da nota."},
-  {id:"lic", nome:"Licenciaturas", tag:"Semipresencial", sub:"Licenciaturas e Educação", semi:true,
-   msg:`*Como funciona o seu curso:*
-• Você faz 2 disciplinas ao mesmo tempo, cada uma com 10 semanas
-• 1º ano: aulas ao vivo online
-• A partir do 2º ano: encontros de 3h cada, alguns online ao vivo com o professor e outros presenciais no polo, agendados por você na plataforma de estudos
-• Prática pedagógica dentro de uma escola
-• Prova das disciplinas no polo
-
-*Como você é aprovado:*
-• Nota até 10: 4 pontos das atividades e 6 da prova
-• Média 7,0 e presença nos encontros`,
-   onde:[["Aulas no polo","Sala de aula (Mova Play)"],["Prova","Laboratório de informática ou sala de aula"],["Estágio","Campo externo"],["Prática pedagógica","Escola"],["Extensão","10% do curso, em ambientes externos ou internos"]],
-   alerta:"A partir do 2º ano, a presença nos encontros conta para a aprovação."},
-  {id:"eng", nome:"Engenharias", tag:"Semipresencial", sub:"Engenharia, Produção e Construção", semi:true,
-   msg:`*Como funciona o seu curso:*
-• Você faz 2 disciplinas ao mesmo tempo, cada uma com 10 semanas
-• 1º ano: aulas ao vivo online
-• A partir do 2º ano: encontros de 3h cada, alguns online ao vivo com o professor e outros presenciais no polo, com aulas em laboratório
-• Você agenda os encontros pela plataforma de estudos
-• Prova das disciplinas no polo
-
-*Como você é aprovado:*
-• Nota até 10: 4 pontos das atividades e 6 da prova
-• Média 7,0 e presença nos encontros`,
-   onde:[["Aulas no polo","Sala de aula"],["Aulas práticas","Laboratório específico"],["Prova","Laboratório de informática ou sala de aula"],["Estágio","Campo externo (exceto Powertech)"],["Extensão","15% do curso, em ambientes externos ou internos"]],
-   alerta:"A partir do 2º ano, a presença nos encontros conta para a aprovação."},
-  {id:"sau", nome:"Saúde", tag:"Semipresencial", sub:"Cursos da área da saúde", semi:true,
-   msg:`*Como funciona o seu curso:*
-• Você faz 2 disciplinas ao mesmo tempo, cada uma com 10 semanas
-• 1º ano: aulas ao vivo online
-• A partir do 2º ano: encontros de 3h cada, alguns online ao vivo com o professor e outros presenciais no laboratório do polo
-• Estágio na área, conforme o curso
-• Você agenda os encontros pela plataforma de estudos
-
-*Como você é aprovado:*
-• Nota até 10: 4 pontos das atividades e 6 da prova
-• Média 7,0 e presença nos encontros`,
-   onde:[["Aulas práticas","Laboratório específico"],["Prova","Laboratório de informática ou sala de aula"],["Estágio","Campo externo ou laboratório (exceto Powertech)"],["Educação Física","Quadra poliesportiva, nas disciplinas esportivas"],["Extensão","15% do curso, em ambientes externos ou internos"]],
-   alerta:"A partir do 2º ano, a presença nos encontros conta para a aprovação."},
-  {id:"bem", nome:"Bem-Estar", tag:"Semipresencial", sub:"Cursos de bem-estar", semi:true,
-   msg:`*Como funciona o seu curso:*
-• Você faz 2 disciplinas ao mesmo tempo, cada uma com 10 semanas
-• 1º ano: aulas ao vivo online
-• A partir do 2º ano: encontros de 3h cada, alguns online ao vivo com o professor e outros presenciais no laboratório do polo
-• Você agenda os encontros pela plataforma de estudos
-• Prova das disciplinas no polo
-
-*Como você é aprovado:*
-• Nota até 10: 4 pontos das atividades e 6 da prova
-• Média 7,0 e presença nos encontros`,
-   onde:[["Aulas práticas","Laboratório específico"],["Prova","Laboratório de informática ou sala de aula"],["Extensão","15% do curso, em ambientes externos ou internos"]],
-   alerta:"A partir do 2º ano, a presença nos encontros conta para a aprovação."}
+  {id:"ead", nome:"EAD", tag:"EAD", sub:"Você estuda no seu horário, com provas no polo.", semi:false, grupos:[
+    {g:"Gestão e Negócios", l:[["Administração","ead",B],["Ciências Contábeis","ead",B],["Ciências Econômicas","ead",B],["Comércio Exterior","ead",T],["Gestão Comercial","ead",T],["Gestão da Produção Industrial","ead",T],["Gestão da Qualidade","ead",T],["Gestão da Saúde Mental no Trabalho","lanc",T],["Gestão de Cooperativas","eadsv",T],["Gestão de Farmácia","ead",T],["Gestão de Negócios Imobiliários","ead",T],["Gestão de Recursos Humanos","ead",T],["Gestão do Agronegócio","ead",T],["Gestão Financeira","ead",T],["Gestão Pública","ead",T],["Investimentos e Mercado Financeiro","ead",T],["Logística","ead",T],["Marketing","ead",T],["Mídias Sociais Digitais","ead",T],["Negócios e Customer Experience","ead",T],["Processos Gerenciais","ead",T],["Psicologia Aplicada às Organizações e Inovação Humana","ead",T],["Secretariado","ead",T]]},
+    {g:"Artes, Design e Humanidades", l:[["Biblioteconomia","ead",B],["Ciência da Felicidade","ead",T],["Cinema e Audiovisual","ead",B],["Design de Animação","ead",T],["Design de Interiores","ead",T],["Design de Moda","ead",T],["Design de Produto","ead",T],["Design Gráfico","ead",T],["Design Musical","ead",T],["Teologia","ead",B]]},
+    {g:"Alimentos, Turismo e Lazer", l:[["Gastronomia","ead",T],["Gestão de Turismo","ead",T]]},
+    {g:"Comunicação", l:[["Ciência da Criatividade","eadsv",T],["Fotografia","ead",T],["Jornalismo","ead",B],["Publicidade e Propaganda","ead",B],["Relações Públicas","ead",B]]},
+    {g:"Tecnologia", l:[["Análise e Desenvolvimento de Sistemas","ead",T],["Banco de Dados","ead",T],["Ciência da Computação","lanc",B],["Engenharia de Software","ead",B],["Gestão da Tecnologia da Informação","ead",T],["Inteligência Artificial","ead",B],["Inteligência Artificial e Machine Learning","ead",T],["Jogos Digitais","ead",T],["Redes de Computadores","ead",T],["Segurança Cibernética","ead",T]]},
+    {g:"Jurídico e Segurança", l:[["Criminologia","ead",T],["Gestão de Serviços Judiciais e Notariais","ead",T],["Investigação e Perícia Judicial","ead",T],["Segurança do Trabalho","ead",T],["Segurança Privada","ead",T],["Segurança Pública","ead",T]]}
+  ]},
+  {id:"edu", nome:"Licenciaturas e Educação", tag:"Semipresencial", sub:"Licenciaturas, Psicopedagogia e Acompanhamento do TEA.", semi:true, grupos:[
+    {g:"Licenciaturas", l:[["Artes Visuais","lic",L],["Ciências Biológicas","lic",L],["Dança","lic",L],["Educação Especial","lic",L],["Educação Física (Licenciatura)","lic",L],["Geografia","lic",L],["História","lic",L],["Letras – Libras","lic",L],["Letras Português – Inglês","lic5",L],["Matemática","lic",L],["Música","lic",L],["Pedagogia","lic",L],["Sociologia","lic",L]]},
+    {g:"Segundas licenciaturas", l:[["Filosofia (segunda licenciatura)","pend",L],["Geografia (segunda licenciatura)","pend",L],["História (segunda licenciatura)","pend",L],["Matemática (segunda licenciatura)","pend",L],["Sociologia (segunda licenciatura)","pend",L]]},
+    {g:"Educação", l:[["Psicopedagogia","psico",B],["Acompanhamento do Transtorno do Espectro Autista","tea",T]]}
+  ]},
+  {id:"eng", nome:"Engenharias", tag:"Semipresencial", sub:"Engenharias, Agronomia e tecnólogos da área.", semi:true, grupos:[
+    {g:"Engenharias e Agronomia", l:[["Engenharia Ambiental e Sanitária","eng",B],["Engenharia Civil","eng",B],["Engenharia Elétrica","eng",B],["Engenharia Mecânica","eng",B],["Engenharia Mecatrônica","eng",B],["Engenharia de Produção","eng",B],["Agronomia","eng",B]]},
+    {g:"Tecnólogos da área", l:[["Automação Industrial","tecind",T],["Manutenção Industrial","tecind",T]]}
+  ]},
+  {id:"sau", nome:"Saúde", tag:"Semipresencial", sub:"Saúde, Bem-estar e tecnólogos da área.", semi:true, grupos:[
+    {g:"Bacharelados", l:[["Biomedicina","bio",B],["Educação Física (Bacharelado)","edf",B],["Farmácia","farm",B],["Fisioterapia","pend",B],["Fonoaudiologia","pend",B],["Nutrição","pend",B],["Serviço Social","pend",B],["Terapia Ocupacional","pend",B]]},
+    {g:"Tecnólogos da área", l:[["Bem-estar Animal","pend",T],["Estética e Cosmética","pend",T],["Gerontologia","pend",T],["Gestão Hospitalar","pend",T],["Podologia","pend",T],["Radiologia","pend",T],["Saúde e Estética Capilar","lanc",T],["Terapias Integrativas e Complementares","pend",T]]}
+  ]}
 ];
 
 /* ---------- FAQ ---------- */
-const FAQ = [
-  ["marco","O que é o novo marco regulatório?",`<p>É o conjunto de regras que o MEC publicou em maio de 2025 (Decreto nº 12.456) para todos os cursos de graduação a distância do Brasil. O objetivo é elevar a qualidade da formação e valorizar o diploma EAD.</p><p>Com ele, nenhum curso pode ser 100% a distância, toda disciplina tem prova presencial e os cursos passam a ter três formatos: presencial, semipresencial e EAD. Cada formato tem um mínimo de atividades presenciais e de <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada).</p><p>As regras valem para todas as faculdades. A Unicesumar já está com seus cursos adequados ao novo modelo.</p>`],
-  ["semipresencial","Qual a diferença entre EAD e semipresencial?",`<ul><li><b>EAD:</b> estudo no tempo do aluno, aulas ao vivo em todos os anos, prova no polo. Reprova só por nota.</li><li><b>Semipresencial:</b> aulas ao vivo no 1º ano. A partir do 2º ano, entram encontros obrigatórios de <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada) e de <a class="termo" href="#faq-presencialidade">presencialidade</a> no polo. Reprova por nota e por frequência.</li></ul><p>Áreas semipresenciais: Licenciaturas, Engenharias, Saúde e Bem-Estar.</p>`],
-  ["asm","O que é ASM (Atividade Síncrona Mediada)?",`<p>É um encontro <b>online e ao vivo</b>, de 3 horas, em que os alunos participam juntos, com um professor ou mediador pedagógico conduzindo.</p><ul><li>Acontece nos cursos semipresenciais, a partir do 2º ano</li><li>O aluno agenda pela plataforma de estudos, conforme as orientações do curso</li><li>A presença é registrada e conta para a aprovação</li></ul>`],
-  ["presencialidade","O que é a presencialidade no polo?",`<p>São encontros <b>no polo de apoio</b>, de 3 horas cada. Neles o aluno pode ter:</p><ul><li>Avaliações e simulados</li><li>Atendimentos e orientações</li><li>Atividades práticas em laboratório e sala de aula</li><li>Uso da estrutura do polo</li></ul><p>No semipresencial, é obrigatória a partir do 2º ano, com agendamento pela plataforma de estudos e presença registrada. No EAD, a parte presencial é a prova, a extensão e o estágio, quando o curso prevê.</p>`],
-  ["agendamento","Como o aluno agenda os encontros?",`<p>Pela plataforma de estudos, seguindo as orientações do curso. Isso vale para a ASM (Atividade Síncrona Mediada) e para a presencialidade no polo.</p>`],
-  ["frequencia","O aluno pode reprovar por falta?",`<ul><li><b>EAD:</b> não. A aprovação depende só da nota.</li><li><b>Semipresencial:</b> sim. A presença na ASM (Atividade Síncrona Mediada) e na presencialidade é obrigatória para ser aprovado.</li></ul>`],
-  ["disciplinas","Como funcionam as disciplinas?",`<p>Cada disciplina dura 10 semanas. O aluno cursa <b>2 disciplinas ao mesmo tempo</b>, e as provas ficam concentradas nas semanas 9 e 10.</p>`],
-  ["media","Como é calculada a média?",`<p>A nota de cada disciplina vai até 10 e a média para aprovação passou de 6,0 para <b>7,0</b>.</p><ul><li>A.E. 01: 0,5</li><li>A.E. 02: 0,5</li><li>HUB de Atualidades: 1,5</li><li>M.A.P.A.: 1,5</li><li>Prova presencial: 6,0</li></ul><p>Ou seja: 4 pontos de atividades e 6 da prova.</p>`],
-  ["prova","Como é a prova presencial?",`<p>É feita no polo e vale <b>6,0 pontos</b>: 1 questão discursiva (2,0) e 8 questões objetivas (4,0). Fica nas semanas 9 e 10 da disciplina.</p><p>Até 2026, eram 10 questões objetivas valendo 4,0.</p>`],
-  ["atividades","O que são A.E., HUB de Atualidades e M.A.P.A.?",`<ul><li><b>A.E. 01 e A.E. 02:</b> atividades objetivas (0,5 cada)</li><li><b>HUB de Atualidades:</b> conteúdos e atividades objetivas ao longo das semanas (1,5)</li><li><b>M.A.P.A.:</b> atividade prática, imersiva e discursiva (1,5)</li></ul><p>Também há a Semana de Conhecimentos Gerais, com atividade objetiva.</p>`],
-  ["aulas","Como são as aulas ao vivo?",`<p>Pelo Teams, com 1h30 de duração.</p><ul><li><b>EAD:</b> em todos os anos do curso</li><li><b>Semipresencial:</b> somente no 1º ano. Depois entram a ASM (Atividade Síncrona Mediada) e a presencialidade.</li></ul>`],
-  ["extensao","O que é extensão?",`<p>São projetos em que o aluno aplica o que aprende em desafios reais da comunidade. Fazem parte da carga horária exigida por lei e <b>contam para o percentual de presencialidade</b>.</p><p>Quanto do curso é extensão em 2027:</p><ul><li><b>EAD:</b> 15%</li><li><b>Licenciaturas:</b> 10%</li><li><b>Engenharias:</b> 15%</li><li><b>Saúde e Bem-Estar:</b> 15%</li></ul><p>Até 2026, era 10% em todos os cursos.</p>`],
-  ["livros","Como funcionam os livros didáticos?",`<p>Até 2026 os livros eram gratuitos. A partir de agora, o aluno compra os livros que escolher pelo <b>Studeo</b> e recebe em casa:</p><ol><li>Acessa o Studeo</li><li>Seleciona o catálogo</li><li>Informa o endereço de entrega</li><li>Vê o valor e a taxa de entrega</li><li>Faz o pagamento</li><li>Recebe os livros em casa</li></ol><div class="alerta"><b>Importante:</b> o PDF dos livros continua gratuito para todos os alunos. A compra é só para quem quiser o livro impresso, e os valores ficam disponíveis para cada aluno consultar no Studeo.</div>`],
+const FAQ_TEMAS = [
+ {tema:"O que mudou em 2027", itens:[
+  ["marco","O que é o novo marco regulatório?",`<p class="resp">São novas regras do MEC para todos os cursos de graduação a distância do Brasil.</p><p>Foram publicadas em maio de 2025. Com elas:</p><ul><li>Nenhuma graduação pode ser 100% a distância</li><li>Toda disciplina tem prova presencial</li><li>Os cursos passam a ser EAD, semipresenciais ou presenciais</li></ul><p>A Unicesumar já está dentro das novas regras.</p>`],
+  ["veterano","Já sou aluno. A mudança vale para mim?",`<p class="resp">Uma parte vale para todos os alunos e outra só para quem entra a partir de 2027/51.</p><p><b>Vale para todos, calouros e veteranos, a partir de 2027:</b></p><ul><li>Disciplinas de 10 semanas</li><li>Prova presencial com 1 questão discursiva e 8 objetivas</li><li>Nova composição da nota e média 7,0</li></ul><p><b>Vale só para calouros do processo 2027/51:</b></p><ul><li>Encontros online (<a class="termo" href="#faq-asm">ASM</a>) e no polo, de 3h</li></ul>`],
+  ["semipresencial","Qual a diferença entre EAD e semipresencial?",`<p class="resp">No EAD, o aluno vai ao polo só para as provas. No semipresencial, também tem encontros online e no polo.</p><ul><li><b>EAD:</b> estudo no seu horário, aulas ao vivo gravadas e provas no polo. Não reprova por falta.</li><li><b>Semipresencial:</b> no 1º ano, aulas ao vivo online. Do 2º ano em diante, encontros online (<a class="termo" href="#faq-asm">ASM</a>) e no polo, que contam presença.</li></ul><p>Áreas semipresenciais: Licenciaturas e Educação, Engenharias e Saúde.</p>`]
+ ]},
+ {tema:"Aulas e encontros", itens:[
+  ["aulas","Como são as aulas ao vivo?",`<p class="resp">São aulas online e em tempo real, pelo Teams, com 1h30 de duração.</p><p>O professor apresenta o conteúdo e conduz a discussão. As aulas ficam gravadas e não contam presença.</p><p><b>Quantas aulas por semana:</b></p><ul><li><b>EAD:</b> 1 aula por semana, alternando as disciplinas</li><li><b>Semipresencial, 1º ano:</b> 2 aulas por semana, uma de cada disciplina</li><li><b>Semipresencial, 2º ano em diante:</b> as aulas ao vivo dão lugar aos encontros online (ASM) e no polo</li></ul><p><b>Cursos sem aula ao vivo:</b></p><ul><li>EAD: Ciência da Criatividade e Gestão de Cooperativas</li><li>Semipresencial: Automação Industrial e Manutenção Industrial</li></ul><p class="dica">A distribuição das aulas pode variar conforme o curso.</p>`],
+  ["asm","O que é a ASM (Atividade Síncrona Mediada)?",`<p class="resp">É um encontro online e ao vivo, de 3h, com a turma.</p><ul><li>Um professor ou mediador conduz o encontro e incentiva a troca de conhecimento</li><li>Turmas de até 70 alunos, com atendimento mais próximo</li><li>Não fica gravado</li><li>A presença conta: mínimo de 75%</li><li>Existe só nos cursos semipresenciais</li></ul>`],
+  ["diferenca","Qual a diferença entre aula ao vivo e ASM?",`<p class="resp">Na aula ao vivo, o professor ensina o conteúdo. Na ASM, a turma participa e troca conhecimento.</p><div class="table-wrap"><table class="mini"><thead><tr><th></th><th>Aula ao vivo</th><th>ASM</th></tr></thead><tbody><tr><th>Duração</th><td>1h30</td><td>3h</td></tr><tr><th>Fica gravada?</th><td>Sim</td><td>Não</td></tr><tr><th>Conta presença?</th><td>Não</td><td>Sim, mínimo de 75%</td></tr><tr><th>Precisa agendar?</th><td>Não</td><td>Sim</td></tr></tbody></table></div>`],
+  ["asm-acesso","Como o aluno entra na ASM?",`<p class="resp">Pelo ícone do Teams, dentro do Studeo.</p><p>Ao entrar, a presença é registrada automaticamente pelo sistema.</p>`],
+  ["presencialidade","O que é a presencialidade no polo?",`<p class="resp">São encontros no polo, de 3h cada, que contam presença.</p><p>Neles, o aluno pode ter avaliações e simulados, atendimentos, aulas em sala e práticas em laboratório.</p><p><b>Como é em cada área:</b></p><ul><li><b>Licenciaturas e Educação:</b> aulas teóricas, no <a class="termo" href="#faq-movaplay">Mova Play</a></li><li><b>Engenharias:</b> aulas teóricas e práticas, em sala e laboratório</li><li><b>Saúde:</b> depende do curso. Biomedicina e Farmácia, em laboratório. Educação Física, em sala, com quadra em algumas disciplinas.</li></ul>`],
+  ["movaplay","O que é o Mova Play?",`<p class="resp">É a sala de presencialidade das Licenciaturas e Educação, com alunos de cursos diferentes.</p><p>Por exemplo: um aluno de Letras e outro de Pedagogia podem estar na mesma sala. É uma boa oportunidade de trocar experiências.</p>`],
+  ["computador","E se o aluno não tiver computador ou internet boa?",`<p class="resp">Ele pode procurar o seu polo de apoio.</p><p>O polo pode verificar se o aluno consegue usar os computadores de lá para participar das aulas e encontros online.</p>`],
+  ["conceituais","As aulas conceituais continuam?",`<p class="resp">Sim.</p><p>Em algumas situações, elas ficam dentro dos livros digitais.</p>`]
+ ]},
+ {tema:"Agendamento e presença", itens:[
+  ["agendamento","Como o aluno agenda os encontros?",`<p class="resp">Pelo Studeo, a plataforma de estudos.</p><ul><li>Os encontros online (ASM) e no polo precisam ser agendados</li><li>Há um período no calendário para agendar</li><li>Se precisar, o aluno pode alterar o agendamento dentro desse período</li><li>As aulas ao vivo não precisam de agendamento</li></ul>`],
+  ["frequencia","O aluno pode reprovar por falta?",`<ul><li><b>EAD:</b> não. A aprovação depende só da nota.</li><li><b>Semipresencial:</b> sim. Ele precisa participar dos encontros online (mínimo de 75%) e no polo.</li></ul>`]
+ ]},
+ {tema:"Provas e notas", itens:[
+  ["disciplinas","Como funcionam as disciplinas?",`<p class="resp">A cada 10 semanas, o aluno cursa 2 disciplinas ao mesmo tempo.</p><ul><li><b>Semanas 1 a 8:</b> aulas e atividades</li><li><b>Semanas 9 e 10:</b> provas no polo</li></ul>`],
+  ["prova","Como é a prova presencial?",`<p class="resp">É feita no polo, vale 6 pontos e dura 50 minutos.</p><ul><li>1 questão discursiva, valendo 2 pontos</li><li>8 questões objetivas, valendo 4 pontos</li></ul><p class="dica">Até 2026, eram 10 questões objetivas valendo 4 pontos.</p>`],
+  ["agenda-prova","Como o aluno agenda as provas?",`<p class="resp">Há um período na semana 9 para agendar uma prova e outro na semana 10 para a outra.</p>`],
+  ["media","Como é calculada a nota?",`<p class="resp">A nota vai até 10, e a média para aprovação é 7,0.</p><ul><li>A.E. 01: 1 ponto</li><li>A.E. 02: 1 ponto</li><li>M.A.P.A.: 2 pontos</li><li>Prova presencial: 6 pontos</li></ul><p class="dica">Até 2026, a média era 6,0. Disciplinas práticas, estágios e TCC podem ter uma composição diferente.</p>`],
+  ["atividades","O que são A.E. e M.A.P.A.?",`<ul><li><b>A.E. 01 e A.E. 02:</b> atividades objetivas, de 1 ponto cada</li><li><b>M.A.P.A.:</b> atividade prática e discursiva, de 2 pontos</li></ul>`],
+  ["substitutiva","E se o aluno não alcançar a média?",`<p class="resp">Ele pode fazer a prova substitutiva para recuperar a nota.</p>`]
+ ]},
+ {tema:"Livros e extensão", itens:[
+  ["livros","Como funcionam os livros didáticos?",`<p class="resp">O PDF dos livros continua gratuito. O livro impresso é opcional e comprado pelo Studeo.</p><p><b>Para comprar o impresso:</b></p><ol><li>Acessa o Studeo</li><li>Seleciona o catálogo</li><li>Informa o endereço de entrega</li><li>Vê o valor e a taxa de entrega</li><li>Faz o pagamento</li><li>Recebe os livros em casa</li></ol><p class="dica">Os valores ficam disponíveis para cada aluno consultar no Studeo. Até 2026, os livros eram gratuitos.</p>`],
+  ["extensao","O que é extensão?",`<p class="resp">São projetos em que o aluno aplica o que aprende em desafios reais da comunidade.</p><p>Fazem parte da carga horária exigida por lei e contam como atividade presencial.</p><p><b>Quanto do curso é extensão:</b></p><ul><li>EAD: 15%</li><li>Licenciaturas: 10%</li><li>Engenharias e Saúde: 15%</li></ul><p class="dica">No EAD, a parte presencial é de 20% do curso: 15% de extensão e 5% de provas.</p>`]
+ ]},
+ {tema:"Cursos", itens:[
+  ["estagios","Como funcionam os estágios?",`<p class="resp">Ainda não recebemos o detalhamento dos estágios.</p><p>Assim que tivermos as informações, como carga horária e onde acontecem, elas serão repassadas à operação. Quando chegar a etapa de estágio, o aluno vai receber todo o suporte e as orientações para realizá-la.</p>`],
+  ["lancamento","O que falar sobre os cursos em lançamento?",`<p class="resp">Ainda não temos informações da metodologia, porque eles não foram lançados oficialmente.</p><p>São eles: Ciência da Computação, Gestão da Saúde Mental no Trabalho e Saúde e Estética Capilar.</p>`]
+ ]}
 ];
 
 const DESC_MSGS = {
@@ -502,9 +702,9 @@ Mas temos outras opções que podem combinar muito com o que você busca para su
 const MARCO_MSG = `*Por que o curso mudou?*
 Em 2025, o MEC criou novas regras para todos os cursos de graduação a distância do Brasil. O objetivo é aumentar a qualidade da formação e valorizar ainda mais o diploma EAD.
 
-Com isso, todas as faculdades precisam incluir atividades presenciais, encontros ao vivo e provas presenciais com peso maior na nota.
+Com isso, todas as faculdades precisam incluir atividades presenciais nos cursos, como as provas no polo.
 
-A Unicesumar já está com os cursos dentro das novas regras. Então você começa a sua graduação num modelo atualizado, com aulas ao vivo, plataforma de estudos moderna e toda a estrutura do polo para as atividades presenciais.`;
+A Unicesumar já está com os cursos dentro das novas regras. Então você começa a sua graduação num modelo atualizado, com plataforma de estudos moderna e toda a estrutura do polo para as atividades presenciais.`;
 
 /* ---------- render áreas ---------- */
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
@@ -518,6 +718,31 @@ frases.querySelectorAll(".seg-btn").forEach(t=>t.addEventListener("click", ()=>{
   frases.querySelectorAll(".seg-btn").forEach(x=>{ const on = x===t; x.classList.toggle("on",on); x.setAttribute("aria-selected",String(on)); });
   frases.querySelectorAll("[data-painel]").forEach(pn=>pn.hidden = pn.dataset.painel !== t.dataset.sit);
 }));
+const COPY_ICO = `<svg class="ico" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+const nz = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const slug = s => nz(s).replace(/ /g,"-");
+
+/* índice de cursos */
+const CURSOS = [];
+const SLUG = {};
+const ALIAS = {
+  "Análise e Desenvolvimento de Sistemas":"ads", "Gestão de Recursos Humanos":"rh recursos humanos",
+  "Gestão da Tecnologia da Informação":"ti", "Acompanhamento do Transtorno do Espectro Autista":"tea autismo",
+  "Letras Português – Inglês":"ingles", "Letras – Libras":"libras", "Publicidade e Propaganda":"publicidade pp",
+  "Educação Física (Licenciatura)":"ed fisica edf", "Educação Física (Bacharelado)":"ed fisica edf",
+  "Ciência da Computação":"computacao", "Engenharia de Software":"software", "Terapia Ocupacional":"to",
+  "Mídias Sociais Digitais":"social media"
+};
+AREAS.forEach(a=>a.grupos.forEach(g=>g.l.forEach(([nome,perfil,tipo])=>{
+  const c = {nome, perfil, tipo, area:a, grupo:g.g, slug:slug(nome), chave:nz(nome+" "+(ALIAS[nome]||"")), lanc: perfil==="lanc"};
+  CURSOS.push(c); SLUG[c.slug] = c;
+})));
+document.querySelectorAll(".desc-list li").forEach(li=>{
+  const nome = li.textContent.trim();
+  CURSOS.push({nome, desc:true, chave:nz(nome)});
+});
+
+/* páginas das áreas */
 document.getElementById("areasPages").outerHTML = AREAS.map(a=>`
 <section class="page" id="p-met-${a.id}" hidden>
   <div class="head">
@@ -526,40 +751,207 @@ document.getElementById("areasPages").outerHTML = AREAS.map(a=>`
     <h1>${a.nome}</h1>
     <p class="lead">${a.sub}</p>
   </div>
-  ${a.semi ? `<div class="steps">
-    <div class="step y1"><small>1º ano</small><b>Aulas ao vivo online</b><span>Pelo Teams, 1h30 cada</span></div>
-    <div class="step y2"><small>2º ano em diante</small><b>Encontros de 3h cada</b><span>Alguns online, de <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada), e outros presenciais no polo, de <a class="termo" href="#faq-presencialidade">presencialidade</a></span></div>
-  </div>` : `<div class="steps">
-    <div class="step y1"><small>Todos os anos do curso</small><b>Aulas ao vivo online</b><span>Pelo Teams, 1h30 cada, e estudo na plataforma no seu horário</span></div>
-    <div class="step y2"><small>No fim de cada disciplina</small><b>Prova presencial no polo</b><span>1 questão discursiva e 8 objetivas, valendo 6,0. Sem encontros de <a class="termo" href="#faq-asm">ASM</a> (Atividade Síncrona Mediada)</span></div>
-  </div>`}
-  <div class="panel chat">
-    <h2>Mensagem para o WhatsApp</h2>
-    <div class="bubble" id="msg-${a.id}">${zap(a.msg)}</div>
-    <button class="btn" type="button" data-copy="${a.id}">
-      <svg class="ico" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span>Copiar mensagem</span>
-    </button>
-  </div>
-  <div class="alerta"><b>Atenção:</b> ${a.alerta} <a class="termo" href="#faq-frequencia">Ver regra</a></div>
-  <div class="panel">
-    <h2>Onde acontecem as atividades</h2>
-    <div class="where">${a.onde.map(([k,v])=>`<div><small>${k}</small><span>${v}</span></div>`).join("")}</div>
-  </div>
+  <div class="slot-busca"></div>
+  <div id="res-${a.id}"></div>
+  <details class="lista-area">
+    <summary><svg class="ico lst-ico" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Ver todos os cursos de ${a.nome}<svg class="ico chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="ans grupos-lista">${a.grupos.map(g=>`<div class="grupo-box"><p class="grupo-tit">${g.g}<span class="count">${g.l.length}</span></p><ul class="lista-cursos">${g.l.map(c=>`<li><a href="#curso-${slug(c[0])}">${c[0].replace(" (segunda licenciatura)","")}</a>${c[1]==="lanc" ? ` <span class="tag tag-lanc">Lançamento</span>` : ``}</li>`).join("")}</ul></div>`).join("")}</div>
+  </details>
 </section>`).join("");
+
+const ARG = {
+  "arg-ead":`Aqui na UniCesumar, você tem a segurança de ingressar em uma instituição preparada e alinhada às novas exigências do MEC! Nossa metodologia une conhecimento, autonomia e interação para proporcionar uma formação ainda mais completa, desenvolvendo competências valorizadas pelo mercado de trabalho e preparando você para aproveitar novas oportunidades profissionais. 💙`,
+  "arg-edu":`Aqui na UniCesumar, você tem a segurança de ingressar em uma instituição preparada e alinhada às novas exigências do MEC! Nossa metodologia une conhecimento, interação e vivências práticas para proporcionar uma formação ainda mais completa, contribuindo para o desenvolvimento de habilidades pedagógicas e preparando você para os desafios e as transformações da educação. 💙`,
+  "arg-eng":`Aqui na UniCesumar, você tem a segurança de ingressar em uma instituição preparada e alinhada às novas exigências do MEC! Nossa metodologia une conhecimento, interação e vivências práticas para proporcionar uma formação ainda mais completa, estimulando o pensamento analítico, a capacidade de solucionar problemas e a aplicação dos conhecimentos nos desafios reais da profissão. 💙`,
+  "arg-sau":`Aqui na UniCesumar, você tem a segurança de ingressar em uma instituição preparada e alinhada às novas exigências do MEC! Nossa metodologia une conhecimento, interação e vivências práticas para proporcionar uma formação ainda mais completa, desenvolvendo habilidades técnicas e profissionais essenciais para uma atuação qualificada e preparada para os desafios da área da saúde. 💙`
+};
+const OBJ_1 = `Eu te entendo! Conciliar trabalho e outros compromissos realmente não é fácil. Mas fique tranquilo: quando os horários estiverem disponíveis, você poderá conhecer a programação e se organizar do jeito que funcionar para você.`;
+const OBJ_PLANO = {edu:"trabalhar com educação", eng:"construir sua carreira na engenharia", sau:"atuar na área da saúde"};
+Object.entries(OBJ_PLANO).forEach(([a,plano])=>{
+  ARG["obj1-"+a] = OBJ_1;
+  ARG["obj2-"+a] = `Você já está dando um passo importante rumo a novas possibilidades, e tenho certeza de que merece fazer esse investimento no seu futuro profissional! Se fizer sentido para você, já deixamos sua vaga garantida e o seu plano de ${plano} começa a sair do papel.`;
+});
+let MSG_ATUAL = {};
+const celula = v => `<td class="${/^Não/.test(v) ? "nao" : "sim"}">${v}</td>`;
+function limparCurso(areaId){
+  document.getElementById("res-"+areaId).innerHTML = ``;
+}
+function mostrarCurso(c){
+  const areaId = c.area.id, p = PERFIS[c.perfil];
+  MSG_ATUAL[areaId] = p.msg;
+  if(p.lanc){
+    document.getElementById("res-"+areaId).innerHTML = `
+    <div class="panel resultado">
+      <div class="res-head"><h2>${c.nome}</h2><span class="tag">${c.tipo}</span><span class="tag tag-lanc">Lançamento</span></div>
+      <div class="alerta"><b>Curso em lançamento.</b> Ainda não temos as informações da metodologia, porque ele ainda não foi lançado oficialmente.</div>
+    </div>`;
+    return;
+  }
+  const pendAviso = p.pendente ? `<div class="alerta"><b>Rotina do curso ainda não foi divulgada com mais detalhes.</b> Utilize o modelo abaixo sem descrever a quantidade de presencialidade e ASM até que tenhamos a informação completa.</div>` : ``;
+  const rotina = p.pendente ? `` : `
+    <div class="rot">
+      <h3 class="rot-tit">Resumo da rotina por ano</h3>
+      <div class="table-wrap anos"><table>
+        <thead><tr><th scope="col"></th>${p.anos.map(x=>`<th scope="col">${x}</th>`).join("")}</tr></thead>
+        <tbody>
+          <tr><th scope="row">Aulas ao vivo</th>${p.vivo.map(celula).join("")}</tr>
+          <tr><th scope="row">Encontros online (ASM)</th>${p.asm.map(celula).join("")}</tr>
+          <tr><th scope="row">Encontros no polo</th>${p.polo.map(celula).join("")}</tr>
+        </tbody>
+      </table></div>
+      <p class="dica">${p.provas || "Provas no polo nas semanas 9 e 10 de todos os anos."}${p.nota ? " " + p.nota : ""}</p>
+    </div>`;
+  document.getElementById("res-"+areaId).innerHTML = `
+  <div class="panel resultado">
+    <div class="res-head"><h2>${c.nome}</h2><span class="tag">${c.tipo}</span>${!p.pendente && p.anos.length>1 ? `<span class="tag">${p.anos.length} anos</span>` : ``}</div>
+    ${pendAviso}
+    <div class="msgs">
+      <h3 class="msgs-tit">Escolha a mensagem</h3>
+      <div class="tabs" role="tablist" aria-label="Tipo de mensagem">
+        <button type="button" class="tab" role="tab" aria-selected="true" data-tab="met"><svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Como funciona o curso</span></button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-tab="arg"><svg class="ico" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg><span>Argumento comercial</span></button>
+        ${c.area.semi ? `<button type="button" class="tab" role="tab" aria-selected="false" data-tab="obj"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Candidato sem tempo</span></button>` : ``}
+      </div>
+      <div class="tab-painel" data-painel="met">
+        <p class="tab-dica">Envie pelo WhatsApp para explicar a rotina e a aprovação.</p>
+        <div class="bubble" id="msg-${areaId}">${zap(p.msg)}</div>
+        <button class="btn" type="button" data-copy="${areaId}">${COPY_ICO}<span>Copiar mensagem</span></button>
+      </div>
+      <div class="tab-painel" data-painel="arg" hidden>
+        <p class="tab-dica">Grave um áudio com este texto para humanizar o atendimento, ou copie e envie.</p>
+        <div class="bubble" id="msg-arg-${areaId}">${esc(ARG["arg-"+areaId])}</div>
+        <button class="btn" type="button" data-copy="arg-${areaId}">${COPY_ICO}<span>Copiar mensagem</span></button>
+      </div>
+      ${c.area.semi ? `<div class="tab-painel" data-painel="obj" hidden>
+        <p class="tab-dica">Use quando o candidato disser que a rotina não permite participar dos encontros. Envie em duas mensagens, nesta ordem.</p>
+        <p class="parte-lbl">1ª mensagem</p>
+        <div class="bubble" id="msg-obj1-${areaId}">${esc(ARG["obj1-"+areaId])}</div>
+        <button class="btn" type="button" data-copy="obj1-${areaId}">${COPY_ICO}<span>Copiar 1ª mensagem</span></button>
+        <p class="parte-lbl">2ª mensagem</p>
+        <div class="bubble" id="msg-obj2-${areaId}">${esc(ARG["obj2-"+areaId])}</div>
+        <button class="btn" type="button" data-copy="obj2-${areaId}">${COPY_ICO}<span>Copiar 2ª mensagem</span></button>
+      </div>` : ``}
+    </div>
+    ${rotina}
+  </div>`;
+}
+document.addEventListener("click", e=>{
+  const t = e.target.closest(".tab"); if(!t) return;
+  const box = t.closest(".msgs");
+  box.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected", b===t ? "true" : "false"));
+  box.querySelectorAll(".tab-painel").forEach(pn=>pn.hidden = pn.dataset.painel!==t.dataset.tab);
+});
+
+/* busca com tolerância a erro de digitação */
+const PARADAS = new Set(["de","da","do","das","dos","e","em","a","o"]);
+function lev(a,b){
+  const m=a.length,n=b.length; if(!m) return n; if(!n) return m;
+  let prev=Array.from({length:n+1},(_,j)=>j);
+  for(let i=1;i<=m;i++){ const cur=[i];
+    for(let j=1;j<=n;j++) cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+    prev=cur; }
+  return prev[n];
+}
+function pontuar(q, c){
+  if(c.chave.includes(q)) return 2 - c.chave.indexOf(q)/200;
+  const qt = q.split(" ").filter(t=>t && !PARADAS.has(t));
+  const nt = c.chave.split(" ").filter(t=>t && !PARADAS.has(t));
+  if(!qt.length || !nt.length) return 0;
+  let soma = 0;
+  for(const t of qt){
+    let melhor = 0;
+    for(const w of nt){
+      if(w.startsWith(t)) { melhor = 1; break; }
+      const d = Math.min(lev(t,w), lev(t, w.slice(0, t.length)));
+      melhor = Math.max(melhor, 1 - d/Math.max(t.length,3));
+    }
+    soma += melhor;
+  }
+  return soma/qt.length;
+}
+function criarBusca(campo, sugs, flutuante){
+  let itens = [], ativo = -1;
+  const fechar = ()=>{ if(flutuante) sugs.hidden = true; else sugs.innerHTML = ""; campo.setAttribute("aria-expanded","false"); ativo = -1; };
+  const marcar = ()=>{ sugs.querySelectorAll(".sug").forEach((b,i)=>b.classList.toggle("on", i===ativo)); if(ativo>=0) campo.setAttribute("aria-activedescendant", sugs.id+"-"+ativo); };
+  function buscar(){
+    const q = nz(campo.value);
+    if(q.length < 2){ fechar(); return; }
+    let res = CURSOS.map(c=>({c, s:pontuar(q,c)})).filter(x=>x.s>=0.75).sort((a,b)=>b.s-a.s);
+    if(res.length && res[0].s >= 1) res = res.filter(x=>x.s >= 1);
+    res = res.slice(0,8);
+    itens = res.map(x=>x.c); ativo = -1;
+    const aproximado = res.length && res[0].s < 1;
+    sugs.innerHTML = !res.length
+      ? `<li class="sug-vazio">Nenhum curso encontrado. Confira a escrita ou veja os <a href="#descontinuados">cursos descontinuados</a>.</li>`
+      : (aproximado ? `<li class="sug-vazio">Você quis dizer:</li>` : ``) + itens.map((c,i)=>`<li role="option" id="${sugs.id}-${i}"><button type="button" class="sug" data-i="${i}"><b>${c.nome}</b><small>${c.desc ? `<span class="sug-desc">Descontinuado</span>` : `${c.area.nome} · ${c.tipo}${c.lanc ? ` · <span class="sug-desc">Lançamento</span>` : ``}`}</small></button></li>`).join("");
+    sugs.hidden = false; campo.setAttribute("aria-expanded","true");
+  }
+  function escolher(c){
+    fechar(); campo.value = ""; campo.blur(); fecharModal();
+    if(c.desc){
+      location.hash = "descontinuados";
+      setTimeout(()=>{ const b=document.getElementById("buscaDesc"); b.value=c.nome; b.dispatchEvent(new Event("input")); },50);
+    } else { location.hash = "curso-"+c.slug; }
+  }
+  campo.addEventListener("input", buscar);
+  campo.addEventListener("focus", buscar);
+  campo.addEventListener("keydown", e=>{
+    if(e.key==="ArrowDown"){ e.preventDefault(); if(itens.length){ ativo=(ativo+1)%itens.length; marcar(); } }
+    else if(e.key==="ArrowUp"){ e.preventDefault(); if(itens.length){ ativo=(ativo-1+itens.length)%itens.length; marcar(); } }
+    else if(e.key==="Enter"){ e.preventDefault(); if(itens.length) escolher(itens[Math.max(ativo,0)]); }
+    else if(e.key==="Escape"){ fechar(); if(!flutuante) fecharModal(); }
+  });
+  sugs.addEventListener("click", e=>{ const b=e.target.closest(".sug"); if(b) escolher(itens[+b.dataset.i]); if(e.target.closest("a")) fecharModal(); });
+  if(flutuante) document.addEventListener("click", e=>{ if(!e.target.closest(".busca-global")) fechar(); });
+  return {fechar};
+}
+const buscaPagina = criarBusca(document.getElementById("buscaCurso"), document.getElementById("sugs"), true);
+const modal = document.getElementById("modalBusca"), campoModal = document.getElementById("buscaModal");
+let focoAntes = null;
+function abrirModal(){
+  focoAntes = document.activeElement; setDrawer(false);
+  modal.hidden = false; document.body.classList.add("sem-rolagem");
+  setTimeout(()=>campoModal.focus(), 30);
+}
+function fecharModal(){
+  if(modal.hidden) return;
+  modal.hidden = true; document.body.classList.remove("sem-rolagem");
+  campoModal.value = ""; document.getElementById("sugsModal").innerHTML = "";
+  if(focoAntes && focoAntes.focus) focoAntes.focus();
+}
+criarBusca(campoModal, document.getElementById("sugsModal"), false);
+document.querySelectorAll("[data-abrir-busca]").forEach(b=>b.addEventListener("click", abrirModal));
+modal.addEventListener("click", e=>{ if(e.target===modal || e.target.closest(".modal-x")) fecharModal(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") fecharModal(); });
+const EXEMPLOS = {
+  "metodologia":"Ex.: pedagogia, engenharia civil, biomedicina",
+  "met-ead":"Ex.: administração, marketing, análise e desenvolvimento de sistemas",
+  "met-edu":"Ex.: pedagogia, letras, psicopedagogia",
+  "met-eng":"Ex.: engenharia civil, agronomia, automação industrial",
+  "met-sau":"Ex.: biomedicina, farmácia, educação física"
+};
+function posicionarBusca(page){
+  const barra = document.getElementById("barraBusca");
+  if(EXEMPLOS[page]) document.getElementById("buscaCurso").placeholder = EXEMPLOS[page];
+  const sec = document.getElementById("p-"+page);
+  const slot = sec && sec.querySelector(".slot-busca");
+  if(slot){ slot.appendChild(barra); barra.hidden = false; } else { barra.hidden = true; }
+  buscaPagina.fechar();
+}
 
 /* ---------- render FAQ ---------- */
 const faqList = document.getElementById("faqList");
-faqList.innerHTML = FAQ.map(([id,q,a])=>`
-<details id="faq-${id}"><summary>${q}<svg class="ico chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">${a}</div></details>`).join("");
+faqList.innerHTML = FAQ_TEMAS.map(t=>`
+<div class="faq-tema"><h2>${t.tema}</h2>${t.itens.map(([id,q,a])=>`
+<details id="faq-${id}"><summary>${q}<svg class="ico chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary><div class="ans">${a}</div></details>`).join("")}</div>`).join("");
 
 /* ---------- copiar ---------- */
 document.addEventListener("click", e=>{
   const b = e.target.closest("[data-copy]"); if(!b) return;
   const id = b.dataset.copy;
-  const a = id==="marco" ? {id:"marco", msg:MARCO_MSG} : DESC_MSGS[id] ? {id, msg:DESC_MSGS[id]} : AREAS.find(x=>x.id===id);
-  const ok = ()=>{ const s=b.querySelector("span"); s.textContent="Mensagem copiada"; b.classList.add("done");
-    setTimeout(()=>{s.textContent="Copiar mensagem"; b.classList.remove("done")},2200); };
+  const a = id==="marco" ? {id:"marco", msg:MARCO_MSG} : DESC_MSGS[id] ? {id, msg:DESC_MSGS[id]} : ARG[id] ? {id, msg:ARG[id]} : {id, msg:MSG_ATUAL[id]};
+  const ok = ()=>{ const s=b.querySelector("span"); s.dataset.orig = s.dataset.orig || s.textContent; s.textContent="Mensagem copiada"; b.classList.add("done");
+    setTimeout(()=>{s.textContent=s.dataset.orig; b.classList.remove("done")},2200); };
   const fallback = ()=>{ const el=document.getElementById("msg-"+a.id); const r=document.createRange(); r.selectNodeContents(el);
     const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); b.querySelector("span").textContent="Texto selecionado: use Ctrl+C"; };
   try{ navigator.clipboard.writeText(a.msg).then(ok, fallback); }catch(err){ fallback(); }
@@ -570,6 +962,7 @@ const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 document.getElementById("busca").addEventListener("input", e=>{
   const t = norm(e.target.value.trim()); let n=0;
   faqList.querySelectorAll("details").forEach(d=>{ const show = !t || norm(d.textContent).includes(t); d.hidden=!show; if(show) n++; });
+  faqList.querySelectorAll(".faq-tema").forEach(g=>g.hidden = !g.querySelector("details:not([hidden])"));
   document.getElementById("faqVazio").hidden = n>0;
 });
 
@@ -599,6 +992,8 @@ function route(){
   let h = location.hash.slice(1) || "inicio";
   let page = h, faqId = null;
   if(h.startsWith("faq-")){ page="faq"; faqId=h; }
+  let cursoSel = null;
+  if(h.startsWith("curso-") && SLUG[h.slice(6)]){ cursoSel = SLUG[h.slice(6)]; page = "met-"+cursoSel.area.id; }
   if(!document.getElementById("p-"+page)) page="inicio";
   document.querySelectorAll(".page").forEach(p=>p.hidden = p.id !== "p-"+page);
 
@@ -607,6 +1002,9 @@ function route(){
     l.dataset.page===page || (l.dataset.page==="metodologia" && isMet)));
   subMet.hidden = !isMet; btnMet.setAttribute("aria-expanded", String(isMet));
   subMet.querySelectorAll("a").forEach(a=>a.classList.toggle("active", a.getAttribute("href")==="#"+page));
+  if(page.startsWith("met-")){ cursoSel ? mostrarCurso(cursoSel) : limparCurso(page.slice(4)); }
+  posicionarBusca(page);
+  document.querySelectorAll(".lista-area[open]").forEach(d=>d.open=false);
   setDrawer(false);
 
   if(faqId){
