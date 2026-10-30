@@ -538,15 +538,15 @@ const APROV_SEMI = `
 • Caso precise, poderá contar com a prova substitutiva`;
 const INICIO = `*Como funciona o seu curso:*
 • A cada 10 semanas, você cursa 2 disciplinas ao mesmo tempo`;
-const VIVO1 = `• *1º ano:* aulas ao vivo toda semana pelo Teams, que ficam gravadas para você assistir quando quiser`;
-const PROVAS = `• Provas no polo, nas semanas 9 e 10, em datas que você agenda`;
+const VIVO1 = `• *1º ano:* toda semana, 1 aula ao vivo de cada disciplina pelo Teams, que ficam gravadas para você assistir quando quiser`;
+const PROVAS = `• Provas no polo: uma na semana 9 e outra na semana 10, em datas que você agenda`;
 const AGENDA = `• Você agenda os encontros na plataforma de estudos (Studeo)`;
 
 const PERFIS = {
-  ead:{anos:["Todos os anos"], vivo:["A cada 2 semanas, por disciplina"], asm:["Não tem"], polo:["Só para as provas"],
+  ead:{anos:["Todos os anos"], vivo:["Toda semana, alternando as disciplinas"], asm:["Não tem"], polo:["Só para as provas"],
     nota:"Aulas ao vivo de 1h30 pelo Teams, que ficam gravadas. No EAD, não há reprovação por falta.",
     msg: INICIO+`
-• Cada disciplina tem aula ao vivo pelo Teams a cada 2 semanas, e as aulas ficam gravadas para você assistir quando quiser
+• Toda semana tem aula ao vivo pelo Teams, alternando entre as 2 disciplinas, e as aulas ficam gravadas para você assistir quando quiser
 • O restante você estuda pela plataforma de estudos (Studeo), no seu horário
 `+PROVAS+APROV},
   eadsv:{anos:["Todos os anos"], vivo:["Não tem"], asm:["Não tem"], polo:["Só para as provas"],
@@ -558,7 +558,7 @@ const PERFIS = {
     nota:"No polo, os encontros são teóricos, em sala Mova Play, que pode reunir alunos de cursos diferentes.",
     msg: INICIO+`
 `+VIVO1+`
-• *Do 2º ano em diante:* por semana, 2 encontros online ao vivo com a turma e 2 encontros no polo, de 3h cada
+• *Do 2º ano em diante:* por semana, 2 encontros online interativos com a turma e o professor, e 2 encontros no polo, de 3h cada
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
   lic5:{anos:["1º ano","2º ano","3º ano","4º ano","5º ano"], vivo:["Toda semana","Não","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana","2 por semana"], polo:["Não","2 por semana","2 por semana","2 por semana","2 por semana"],
@@ -568,44 +568,46 @@ const PERFIS = {
     nota:"No polo, os encontros são teóricos, em sala Mova Play.",
     msg: INICIO+`
 `+VIVO1+`
-• *Do 2º ano em diante:* por semana, 2 encontros online ao vivo com a turma e 1 encontro no polo, de 3h cada
+• *Do 2º ano em diante:* por semana, 2 encontros online interativos com a turma e o professor, e 1 encontro no polo, de 3h cada
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
   tea:{anos:["1º ano","2º ano","3º ano"], vivo:["Toda semana","Não","Não"], asm:["Não","Sim","Sim"], polo:["Não","Sim","Sim"],
     nota:"No polo, os encontros são teóricos, em sala Mova Play. A quantidade de encontros por semana do 2º e 3º ano ainda não foi detalhada.",
     msg: INICIO+`
 `+VIVO1+`
-• *Do 2º ano em diante:* encontros online ao vivo com a turma e encontros no polo, de 3h cada
+• *Do 2º ano em diante:* encontros online interativos com a turma e o professor, e encontros no polo, de 3h cada
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
   eng:{anos:["1º ano","2º ano","3º ano","4º ano","5º ano"], vivo:["Toda semana","Não","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana","2 por semana"], polo:["Não","1 por semana","1 por semana","1 por semana","1 por semana"],
     nota:"No 2º ano, os encontros online vão da semana 1 à 6. No polo, aulas teóricas e práticas, em sala e laboratório. No 5º ano, os módulos com TCC têm 1 encontro a mais no polo.",
     msg: INICIO+`
 `+VIVO1+`
-• *Do 2º ano em diante:* por semana, 2 encontros online ao vivo com a turma e 1 encontro no polo, de 3h cada, com aulas em sala e laboratório
+• *Do 2º ano em diante:* por semana, 2 encontros online interativos com a turma e o professor, e 1 encontro no polo, de 3h cada, com aulas em sala e laboratório
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
   tecind:{anos:["1º ano","2º ano","3º ano"], vivo:["Não","Não","Não"], asm:["1 por semana","2 por semana","2 por semana"], polo:["1 por semana","2 por semana","2 por semana"],
     nota:"No polo, aulas teóricas e práticas, em sala e no laboratório do curso.",
     msg: INICIO+`
 • Seu curso é prático desde o início: não tem aulas ao vivo e os encontros no polo começam no 1º ano
-• *1º ano:* por semana, 1 encontro online ao vivo com a turma e 1 encontro no polo, de 3h cada
+• *1º ano:* por semana, 1 encontro online interativo com a turma e o professor, e 1 encontro no polo, de 3h cada
 • *Do 2º ano em diante:* por semana, 2 encontros online e 2 no polo, de 3h cada
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
-  edf:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","Em 4 semanas do módulo","Em 6 semanas do módulo","Não"],
+  edf:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","Em 4 das 10 semanas","Em 6 das 10 semanas","Não"],
     nota:"No polo, atividades teórico-práticas em sala. Algumas disciplinas podem usar quadra poliesportiva por convênio.",
     msg: INICIO+`
 `+VIVO1+`
-• *Do 2º ano em diante:* 2 encontros online ao vivo com a turma por semana, de 3h cada
-• *2º e 3º ano:* também tem encontros no polo em algumas semanas do módulo, com atividades teóricas e práticas
+• *Do 2º ano em diante:* 2 encontros online interativos com a turma e o professor por semana, de 3h cada
+• *2º ano:* encontros no polo em 4 das 10 semanas
+• *3º ano:* encontros no polo em 6 das 10 semanas
+• Os encontros no polo têm atividades teóricas e práticas
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
   bio:{anos:["1º ano","2º ano","3º ano","4º ano"], vivo:["Toda semana","Não","Não","Não"], asm:["Não","2 por semana","2 por semana","2 por semana"], polo:["Não","Não","1 por semana","Não"],
     nota:"No polo, aulas práticas em laboratório.",
     msg: INICIO+`
 `+VIVO1+`
-• *Do 2º ano em diante:* 2 encontros online ao vivo com a turma por semana, de 3h cada
+• *Do 2º ano em diante:* 2 encontros online interativos com a turma e o professor por semana, de 3h cada
 • *3º ano:* além dos encontros online, 1 encontro por semana no laboratório do polo, de 3h
 `+AGENDA+`
 `+PROVAS+APROV_SEMI},
@@ -614,7 +616,7 @@ const PERFIS = {
     nota:"No polo, aulas práticas em laboratório. A carga horária dos estágios ainda não foi divulgada.",
     msg: INICIO+`
 `+VIVO1+`
-• *2º ao 4º ano:* 2 encontros online ao vivo com a turma por semana, de 3h cada
+• *2º ao 4º ano:* 2 encontros online interativos com a turma e o professor por semana, de 3h cada
 • *3º e 4º ano:* também 1 encontro por semana no laboratório do polo, de 3h
 • *5º ano:* estágio supervisionado e 1 encontro online por semana
 `+AGENDA+`
@@ -622,7 +624,7 @@ const PERFIS = {
   lanc:{lanc:true, msg:""},
   pend:{pendente:true,
     msg: INICIO+`
-• O curso é semipresencial: tem encontros online ao vivo com a turma e encontros no polo, de 3h cada
+• O curso é semipresencial: tem encontros online interativos com a turma e o professor, e encontros no polo, de 3h cada
 `+AGENDA+`
 `+PROVAS+APROV_SEMI}
 };
@@ -767,10 +769,9 @@ const ARG = {
 };
 const OBJ_1 = `Eu te entendo! Conciliar trabalho e outros compromissos realmente não é fácil. Mas fique tranquilo: quando os horários estiverem disponíveis, você poderá conhecer a programação e se organizar do jeito que funcionar para você.`;
 const OBJ_PLANO = {edu:"trabalhar com educação", eng:"construir sua carreira na engenharia", sau:"atuar na área da saúde"};
-Object.entries(OBJ_PLANO).forEach(([a,plano])=>{
-  ARG["obj1-"+a] = OBJ_1;
-  ARG["obj2-"+a] = `Você já está dando um passo importante rumo a novas possibilidades, e tenho certeza de que merece fazer esse investimento no seu futuro profissional! Se fizer sentido para você, já deixamos sua vaga garantida e o seu plano de ${plano} começa a sair do papel.`;
-});
+const OBJ_CURSO = {"Agronomia":"trabalhar com agronomia", "Automação Industrial":"trabalhar com automação industrial", "Manutenção Industrial":"trabalhar com manutenção industrial"};
+const obj2 = plano => `Você já está dando um passo importante rumo a novas possibilidades, e tenho certeza de que merece fazer esse investimento no seu futuro profissional! Se fizer sentido para você, já deixamos sua vaga garantida e o seu plano de ${plano} começa a sair do papel.`;
+Object.keys(OBJ_PLANO).forEach(a=>{ ARG["obj1-"+a] = OBJ_1; ARG["obj2-"+a] = obj2(OBJ_PLANO[a]); });
 let MSG_ATUAL = {};
 const celula = v => `<td class="${/^Não/.test(v) ? "nao" : "sim"}">${v}</td>`;
 function limparCurso(areaId){
@@ -779,6 +780,7 @@ function limparCurso(areaId){
 function mostrarCurso(c){
   const areaId = c.area.id, p = PERFIS[c.perfil];
   MSG_ATUAL[areaId] = p.msg;
+  if(OBJ_PLANO[areaId]) ARG["obj2-"+areaId] = obj2(OBJ_CURSO[c.nome] || OBJ_PLANO[areaId]);
   if(p.lanc){
     document.getElementById("res-"+areaId).innerHTML = `
     <div class="panel resultado">
